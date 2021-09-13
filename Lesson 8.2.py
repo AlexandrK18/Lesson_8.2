@@ -1,5 +1,7 @@
 from pprint import pprint
 
+from collections import Counter
+
 def prepare_dict(file_name: str) -> dict:
     result: dict = dict()
 
@@ -21,13 +23,16 @@ result_dict = prepare_dict("recipes2.txt")
 
 def get_shop_list_by_dishes(dishes, person_count):
 
-  Result = {}
+  result = {}
+  may_list = []
   for dishe in dishes:
     if dishe in result_dict:
-        for ingredient in result_dict[dishe]:     
+        for ingredient in result_dict[dishe]:    
             ingredients = ingredient['ingredient_name']
-            dish_list = {'measure': ingredient['measure'], 'quantity': ingredient['quantity'] * person_count}
-            Result[ingredients] = dish_list
-  return Result
+            may_list.append(ingredients)
+            coont_dict = Counter(may_list)
+            dish_list = {'measure': ingredient['measure'], 'quantity': ingredient['quantity'] * person_count * coont_dict[ingredients]}
+            result[ingredients] = dish_list
+  return result
 
-pprint(get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2))
+pprint(get_shop_list_by_dishes(['Омлет','Омлет'], 1))
