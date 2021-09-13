@@ -30,8 +30,8 @@ def get_shop_list_by_dishes(dishes, person_count):
         for ingredient in result_dict[dishe]:    
             ingredients = ingredient['ingredient_name']
             may_list.append(ingredients)
-            coont_dict = Counter(may_list)
-            dish_list = {'measure': ingredient['measure'], 'quantity': ingredient['quantity'] * person_count * coont_dict[ingredients]}
+            count_dict = Counter(may_list)
+            dish_list = {'measure': ingredient['measure'], 'quantity': ingredient['quantity'] * person_count * count_dict[ingredients]}
             result[ingredients] = dish_list
   return result
 
